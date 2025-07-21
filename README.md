@@ -133,8 +133,8 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 [![GitHub](https://img.shields.io/badge/GitHub-itzyasii-blue?style=flat\&logo=github)](https://github.com/itzyasii)
 [![Twitter](https://img.shields.io/badge/Twitter-@itzyasiii-blue?style=flat\&logo=twitter)](https://twitter.com/itzyasiii)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-yasirali-blue?style=flat\&logo=linkedin)](https://linkedin.com/in/yasirali)
-[![Portfolio](https://img.shields.io/badge/Portfolio-yasirali.dev-green?style=flat)](https://yasirali.dev)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-yasirali-blue?style=flat\&logo=linkedin)](https://linkedin.com/in/itzyasiii)
+[![Portfolio](https://img.shields.io/badge/Portfolio-yasirali-green?style=flat)](https://[yasirali.dev](https://yasiralipechuho-portfolio.netlify.app)
 
 ---
 
