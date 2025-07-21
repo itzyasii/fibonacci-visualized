@@ -134,9 +134,11 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 [![GitHub](https://img.shields.io/badge/GitHub-itzyasii-blue?style=flat\&logo=github)](https://github.com/itzyasii)
 [![Twitter](https://img.shields.io/badge/Twitter-@itzyasiii-blue?style=flat\&logo=twitter)](https://twitter.com/itzyasiii)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-yasirali-blue?style=flat\&logo=linkedin)](https://linkedin.com/in/itzyasiii)
-[![Portfolio](https://img.shields.io/badge/Portfolio-yasirali-green?style=flat)](https://[yasiralipechuho-portfolio.netlify.app](https://yasiralipechuho-portfolio.netlify.app))
+[![Portfolio](https://img.shields.io/badge/Portfolio-yasirali-green?style=flat)](https://yasiralipechuho-portfolio.netlify.app)
+
 
 ---
 
 > “Mathematics is the poetry of logical ideas.” – *Albert Einstein*
+> 
 > Explore the beauty of mathematics through this interactive visualization!
