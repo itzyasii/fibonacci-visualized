@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Fibonacci Sequence Visualizer | Interactive Math Learning Tool
+    </title>
+    <meta
+      name="description"
+      content="Interactive Fibonacci sequence generator with visual representation. Learn how each number is formed by adding the two previous numbers. Perfect for math students and educators."
+    />
+    <meta
+      name="keywords"
+      content="fibonacci sequence, fibonacci series, math visualization, interactive math, mathematics tool, number sequence, golden ratio, math education"
+    />
+    <meta name="author" content="Yasir Ali." />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://example.com/fibonacci-visualizer"
+    />
+    <meta
+      property="og:title"
+      content="Interactive Fibonacci Sequence Visualizer"
+    />
+    <meta
+      property="og:description"
+      content="Visualize how Fibonacci numbers are created by adding the two previous numbers. Interactive learning tool for mathematics."
+    />
+    <meta
+      property="og:image"
+      content="https://www.freepnglogos.com/uploads/golden-ratio-png/golden-ratio-file-fibonacci-spiral-svg-wikimedia-commons-16.png"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://example.com/fibonacci-visualizer"
+    />
+    <meta
+      property="twitter:title"
+      content="Interactive Fibonacci Sequence Visualizer"
+    />
+    <meta
+      property="twitter:description"
+      content="Visualize how Fibonacci numbers are created by adding the two previous numbers. Interactive learning tool for mathematics."
+    />
+    <meta
+      property="twitter:image"
+      content="https://www.freepnglogos.com/uploads/golden-ratio-png/golden-ratio-file-fibonacci-spiral-svg-wikimedia-commons-16.png"
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://example.com/fibonacci-visualizer" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>∑</text></svg>"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>
+          <i class="fas fa-calculator"></i> Interactive Fibonacci Sequence
+          Visualizer
+        </h1>
+        <p class="subtitle">
+          Discover the mathematical beauty of the Fibonacci sequence! Our
+          interactive tool visually demonstrates how each number is formed by
+          adding the two preceding numbers. Perfect for students, teachers, and
+          math enthusiasts.
+        </p>
+        <div class="math-equation">
+          F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub>
+        </div>
+      </header>
+
+      <div class="controls">
+        <button
+          id="nextBtn"
+          class="btn"
+          aria-label="Generate next Fibonacci number"
+        >
+          <i class="fas fa-forward"></i> Next Fibonacci Number
+        </button>
+        <button
+          id="resetBtn"
+          class="btn reset"
+          aria-label="Reset Fibonacci sequence"
+        >
+          <i class="fas fa-redo"></i> Reset Sequence
+        </button>
+      </div>
+
+      <div class="sequence-info">
+        <div class="sequence-item">
+          Sequence Length: <span id="sequenceLength">2</span>
+        </div>
+        <div class="sequence-item">
+          Current Number: <span id="currentNumber">1</span>
+        </div>
+        <div class="sequence-item">
+          Next Number: <span id="nextNumber">1</span>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <h2 class="chart-title">Fibonacci Visualization Chart</h2>
+        <div class="chart" id="chart"></div>
+      </div>
+
+      <div class="explanation">
+        <h2>
+          <i class="fas fa-lightbulb"></i> Understanding the Fibonacci Sequence
+        </h2>
+
+        <h3>What is the Fibonacci Sequence?</h3>
+        <p>
+          The Fibonacci sequence is a series of numbers where each number is the
+          sum of the two preceding ones, typically starting with 0 and 1. In our
+          visualizer, we start with 1 and 1 for simplicity.
+        </p>
+
+        <h3>How It Works</h3>
+        <p>When you click "Next", the visualization:</p>
+        <ul>
+          <li>Highlights the two previous numbers in gold</li>
+          <li>Shows a "+" animation between them</li>
+          <li>Adds a new bar representing their sum</li>
+          <li>Updates the sequence information</li>
+        </ul>
+
+        <h3>Real-World Applications</h3>
+        <p>The Fibonacci sequence appears throughout nature and mathematics:</p>
+        <ul>
+          <li>Arrangement of leaves on a stem (phyllotaxis)</li>
+          <li>Spiral patterns in sunflowers and pinecones</li>
+          <li>Structure of hurricanes and galaxies</li>
+          <li>Financial markets analysis</li>
+          <li>Computer algorithms and data structures</li>
+        </ul>
+      </div>
+
+      <div class="seo-content">
+        <h2>Fibonacci Sequence: Mathematical Insights</h2>
+
+        <div class="seo-section">
+          <h3>The Mathematical Definition</h3>
+          <p>
+            The Fibonacci sequence is formally defined by the recurrence
+            relation:
+          </p>
+          <p class="math-equation">F(n) = F(n-1) + F(n-2)</p>
+          <p>
+            with seed values F(0) = 0 and F(1) = 1. However, our visualization
+            starts with F(1) = 1 and F(2) = 1 for educational clarity.
+          </p>
+        </div>
+
+        <div class="seo-section">
+          <h3>Connection to the Golden Ratio</h3>
+          <p>
+            As the sequence progresses, the ratio between consecutive Fibonacci
+            numbers approaches the Golden Ratio (φ ≈ 1.6180339887). This
+            mathematical constant appears in art, architecture, and nature.
+          </p>
+          <p class="math-equation">
+            lim<sub>n→∞</sub> F(n+1)/F(n) = φ = (1 + √5)/2
+          </p>
+        </div>
+
+        <div class="seo-section">
+          <h3>Educational Value</h3>
+          <p>
+            This interactive Fibonacci visualizer serves as an excellent
+            educational tool for:
+          </p>
+          <ul>
+            <li>Introducing recursive sequences to students</li>
+            <li>Visualizing mathematical patterns</li>
+            <li>Understanding exponential growth patterns</li>
+            <li>Connecting mathematics to natural phenomena</li>
+            <li>Making abstract concepts tangible</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <p>Fibonacci Sequence Visualizer &copy; 2023 - All Rights Reserved</p>
+        <p>
+          Designed for educational purposes | Perfect for math classrooms and
+          self-learners
+        </p>
+        <p>
+          Keywords: interactive math tool, fibonacci visualization, math
+          education, fibonacci sequence generator, mathematical patterns
+        </p>
+      </footer>
+    </div>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource",
+        "name": "Interactive Fibonacci Sequence Visualizer",
+        "description": "Educational tool that visually demonstrates how Fibonacci numbers are generated by adding the two previous numbers in the sequence, Created by: Yasir Ali...",
+        "educationalLevel": "High school to undergraduate",
+        "learningResourceType": "Interactive visualizer",
+        "about": {
+          "@type": "DefinedTerm",
+          "name": "Fibonacci sequence",
+          "inDefinedTermSet": "Mathematics"
+        },
+        "creator": {
+          "@type": "Organization",
+          "name": "Yasir Ali"
+        },
+        "accessMode": "visual",
+        "accessibilityFeature": ["interactive", "visualAnimation"]
+      }
+    </script>
+    <script src="./script.js" />
+  </body>
+</html>
