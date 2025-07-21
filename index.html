@@ -33,7 +33,7 @@
     />
     <meta
       property="og:image"
-      content="https://www.freepnglogos.com/uploads/golden-ratio-png/golden-ratio-file-fibonacci-spiral-svg-wikimedia-commons-16.png"
+      content="https://media.istockphoto.com/id/951686588/photo/the-golden-spiral.jpg?s=612x612&w=0&k=20&c=JGdIxZmA6unUiEfSEgXeLNoadPOfM3YOyCa3VjQE0Pk=&q"
     />
 
     <!-- Twitter -->
@@ -52,7 +52,7 @@
     />
     <meta
       property="twitter:image"
-      content="https://www.freepnglogos.com/uploads/golden-ratio-png/golden-ratio-file-fibonacci-spiral-svg-wikimedia-commons-16.png"
+      content="https://media.istockphoto.com/id/951686588/photo/the-golden-spiral.jpg?s=612x612&w=0&k=20&c=JGdIxZmA6unUiEfSEgXeLNoadPOfM3YOyCa3VjQE0Pk=&q"
     />
 
     <!-- Canonical URL -->
@@ -69,6 +69,28 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
+      :root {
+        --primary-color: #4e54c8;
+        --secondary-color: #8f94fb;
+        --accent-color: #ffd166;
+        --error-color: #ff6b6b;
+        --success-color: #06d6a0;
+        --background-gradient: linear-gradient(
+          135deg,
+          #1a2a6c,
+          #b21f1f,
+          #1a2a6c
+        );
+        --bar-color: linear-gradient(
+          to top,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        --highlight-color: linear-gradient(to top, #ff9e00, #ffd166);
+        --toc-bg: rgba(255, 255, 255, 0.1);
+        --toc-hover: rgba(255, 255, 255, 0.2);
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -77,11 +99,12 @@
       }
 
       body {
-        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+        background: var(--background-gradient);
         color: #fff;
         min-height: 100vh;
         padding: 20px;
         line-height: 1.6;
+        position: relative;
       }
 
       .container {
@@ -98,6 +121,32 @@
         border-radius: 15px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         backdrop-filter: blur(4px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        animation: header-border 10s linear infinite;
+      }
+
+      @keyframes header-border {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
       }
 
       h1 {
@@ -125,6 +174,65 @@
         font-size: 1.4rem;
         letter-spacing: 1px;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      /* Table of Contents */
+      .toc-container {
+        background: var(--toc-bg);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 30px auto;
+        max-width: 800px;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .toc-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: var(--accent-color);
+        text-align: center;
+      }
+
+      .toc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+      }
+
+      .toc-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 12px;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .toc-item:hover {
+        background: var(--toc-hover);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .toc-item a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .toc-item a:hover {
+        color: var(--accent-color);
+      }
+
+      .toc-item i {
+        margin-right: 8px;
+        color: var(--accent-color);
       }
 
       .controls {
@@ -146,15 +254,38 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        background: #4e54c8;
+        background: var(--primary-color);
         color: white;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.3)
+        );
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+        z-index: -1;
+      }
+
+      .btn:hover::before {
+        transform: translateX(0);
       }
 
       .btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        background: #5a5fd6;
       }
 
       .btn:active {
@@ -162,11 +293,19 @@
       }
 
       .btn.reset {
-        background: #ff6b6b;
+        background: var(--error-color);
       }
 
       .btn.reset:hover {
         background: #ff7e7e;
+      }
+
+      .btn.auto {
+        background: var(--success-color);
+      }
+
+      .btn.auto:hover {
+        background: #07e8b1;
       }
 
       .sequence-info {
@@ -191,6 +330,72 @@
         min-width: 80px;
         text-align: center;
         transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .sequence-item.highlight {
+        background: rgba(255, 209, 102, 0.25);
+        box-shadow: 0 0 15px rgba(255, 209, 102, 0.5);
+      }
+
+      .additional-controls {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px auto;
+        max-width: 800px;
+        flex-wrap: wrap;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 12px;
+        min-width: 200px;
+      }
+
+      .control-group label {
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .slider-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+
+      input[type="range"] {
+        flex: 1;
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        outline: none;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--accent-color);
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .speed-value {
+        background: var(--primary-color);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        min-width: 60px;
+        text-align: center;
       }
 
       .chart-container {
@@ -200,13 +405,14 @@
         margin: 30px 0;
         backdrop-filter: blur(5px);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        position: relative;
       }
 
       .chart-title {
         text-align: center;
         margin-bottom: 20px;
         font-size: 1.6rem;
-        color: #ffd166;
+        color: var(--accent-color);
       }
 
       .chart {
@@ -223,7 +429,7 @@
 
       .bar {
         width: 70px;
-        background: linear-gradient(to top, #4e54c8, #8f94fb);
+        background: var(--bar-color);
         border-radius: 8px 8px 0 0;
         display: flex;
         flex-direction: column;
@@ -247,12 +453,12 @@
         top: -30px;
         font-size: 1.2rem;
         font-weight: bold;
-        color: #ffd166;
+        color: var(--accent-color);
       }
 
       .highlight {
         animation: highlight 1.5s ease-in-out;
-        box-shadow: 0 0 20px #ffd166, 0 0 30px #ff9e00;
+        box-shadow: 0 0 20px var(--accent-color), 0 0 30px #ff9e00;
       }
 
       @keyframes highlight {
@@ -261,7 +467,7 @@
         }
         50% {
           transform: scale(1.05);
-          background: linear-gradient(to top, #ff9e00, #ffd166);
+          background: var(--highlight-color);
         }
         100% {
           transform: scale(1);
@@ -272,7 +478,7 @@
         position: absolute;
         top: 50%;
         font-size: 2.5rem;
-        color: #ffd166;
+        color: var(--accent-color);
         font-weight: bold;
         opacity: 0;
         animation: fadeInOut 1.5s forwards;
@@ -293,6 +499,28 @@
         }
       }
 
+      .golden-ratio-display {
+        background: rgba(255, 215, 0, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 600px;
+        text-align: center;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+      }
+
+      .golden-ratio-value {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--accent-color);
+        margin-top: 10px;
+      }
+
+      .golden-ratio-info {
+        font-size: 1.1rem;
+        margin-top: 5px;
+      }
+
       .explanation {
         background: rgba(255, 255, 255, 0.1);
         border-radius: 15px;
@@ -303,14 +531,14 @@
       }
 
       .explanation h2 {
-        color: #ffd166;
+        color: var(--accent-color);
         margin-bottom: 20px;
         text-align: center;
         font-size: 1.8rem;
       }
 
       .explanation h3 {
-        color: #ffd166;
+        color: var(--accent-color);
         margin: 20px 0 10px;
         font-size: 1.4rem;
       }
@@ -326,6 +554,24 @@
 
       .explanation li {
         margin-bottom: 8px;
+      }
+
+      .spiral-container {
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      .spiral-title {
+        color: var(--accent-color);
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .spiral-canvas {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 0 auto;
       }
 
       footer {
@@ -349,7 +595,7 @@
       }
 
       .seo-content h2 {
-        color: #ffd166;
+        color: var(--accent-color);
         text-align: center;
         margin-bottom: 20px;
       }
@@ -359,9 +605,70 @@
       }
 
       .seo-section h3 {
-        color: #ffd166;
+        color: var(--accent-color);
         margin-bottom: 15px;
         font-size: 1.4rem;
+      }
+
+      .social-icons {
+        margin-top: 15px;
+      }
+
+      .social-icons a {
+        display: inline-block;
+        margin: 0 12px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        text-align: center;
+        line-height: 40px;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .social-icons a:hover {
+        background: var(--primary-color);
+        transform: translateY(-3px);
+      }
+
+      .keyboard-hint {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        margin-top: 10px;
+      }
+
+      .doc-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .doc-link {
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .doc-link:hover {
+        background: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+
+      .section-anchor {
+        display: block;
+        position: relative;
+        top: -100px;
+        visibility: hidden;
       }
 
       @media (max-width: 768px) {
@@ -407,46 +714,115 @@
           align-items: center;
           gap: 15px;
         }
+
+        .additional-controls {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .toc-grid {
+          grid-template-columns: 1fr;
+        }
       }
-      .social-icons {
-        margin-top: 8px;
+
+      /* Spinner for auto mode */
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-left: 8px;
       }
-      .social-icons a {
-        margin: 0 8px;
-        text-decoration: none;
-        color: #666;
-        font-size: 1.2rem;
-      }
-      .social-icons a:hover {
-        color: var(--bar-color);
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <header>
+      <header id="intro">
         <h1>
           <i class="fas fa-calculator"></i> Interactive Fibonacci Sequence
           Visualizer
         </h1>
         <p class="subtitle">
           Discover the mathematical beauty of the Fibonacci sequence! Our
-          interactive tool visually demonstrates how each number is formed by
-          adding the two preceding numbers. Perfect for students, teachers, and
-          math enthusiasts.
+          enhanced tool visually demonstrates how each number is formed by
+          adding the two preceding numbers. Explore the Golden Ratio and
+          Fibonacci spiral with this interactive educational tool.
         </p>
         <div class="math-equation">
           F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub>
         </div>
       </header>
 
-      <div class="controls">
+      <!-- Table of Contents -->
+      <div class="toc-container">
+        <h2 class="toc-title">
+          <i class="fas fa-bookmark"></i> Table of Contents
+        </h2>
+        <div class="toc-grid">
+          <div class="toc-item">
+            <a href="#controls"><i class="fas fa-sliders-h"></i> Controls</a>
+          </div>
+          <div class="toc-item">
+            <a href="#sequence-info"
+              ><i class="fas fa-info-circle"></i> Sequence Info</a
+            >
+          </div>
+          <div class="toc-item">
+            <a href="#golden-ratio"
+              ><i class="fas fa-divide"></i> Golden Ratio</a
+            >
+          </div>
+          <div class="toc-item">
+            <a href="#visualization"
+              ><i class="fas fa-chart-bar"></i> Visualization</a
+            >
+          </div>
+          <div class="toc-item">
+            <a href="#spiral"
+              ><i class="fas fa-circle-notch"></i> Fibonacci Spiral</a
+            >
+          </div>
+          <div class="toc-item">
+            <a href="#explanation"
+              ><i class="fas fa-lightbulb"></i> Explanation</a
+            >
+          </div>
+          <div class="toc-item">
+            <a href="#insights"
+              ><i class="fas fa-brain"></i> Mathematical Insights</a
+            >
+          </div>
+          <div class="toc-item">
+            <a href="#documentation"
+              ><i class="fas fa-book"></i> Documentation</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="controls" id="controls">
         <button
           id="nextBtn"
           class="btn"
           aria-label="Generate next Fibonacci number"
         >
           <i class="fas fa-forward"></i> Next Fibonacci Number
+        </button>
+        <button
+          id="autoBtn"
+          class="btn auto"
+          aria-label="Auto-generate Fibonacci numbers"
+        >
+          <i class="fas fa-play"></i> Auto Generate
         </button>
         <button
           id="resetBtn"
@@ -457,7 +833,7 @@
         </button>
       </div>
 
-      <div class="sequence-info">
+      <div class="sequence-info" id="sequence-info">
         <div class="sequence-item">
           Sequence Length: <span id="sequenceLength">2</span>
         </div>
@@ -467,14 +843,93 @@
         <div class="sequence-item">
           Next Number: <span id="nextNumber">1</span>
         </div>
+        <div class="sequence-item highlight">
+          Golden Ratio: <span id="goldenRatio">1.00</span>
+        </div>
       </div>
 
-      <div class="chart-container">
+      <div class="additional-controls">
+        <div class="control-group">
+          <label for="speedSlider">Animation Speed:</label>
+          <div class="slider-container">
+            <input
+              type="range"
+              id="speedSlider"
+              min="100"
+              max="2000"
+              step="100"
+              value="800"
+            />
+            <span class="speed-value" id="speedValue">800ms</span>
+          </div>
+        </div>
+        <div class="control-group">
+          <label for="startValue">Starting Values:</label>
+          <div class="slider-container">
+            <button id="setStartBtn" class="btn">Set Values</button>
+            <div>
+              <input
+                type="number"
+                id="start1"
+                min="0"
+                max="10"
+                value="1"
+                style="
+                  width: 60px;
+                  padding: 5px;
+                  border-radius: 4px;
+                  border: none;
+                  background: rgba(255, 255, 255, 0.2);
+                  color: white;
+                  text-align: center;
+                "
+              />
+              <input
+                type="number"
+                id="start2"
+                min="0"
+                max="10"
+                value="1"
+                style="
+                  width: 60px;
+                  padding: 5px;
+                  border-radius: 4px;
+                  border: none;
+                  background: rgba(255, 255, 255, 0.2);
+                  color: white;
+                  text-align: center;
+                "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="golden-ratio-display" id="golden-ratio">
+        <h3>Golden Ratio Approximation</h3>
+        <div class="golden-ratio-value" id="goldenRatioValue">1.00</div>
+        <div class="golden-ratio-info">
+          As the sequence progresses, the ratio between consecutive numbers
+          approaches φ ≈ 1.61803
+        </div>
+      </div>
+
+      <div class="chart-container" id="visualization">
         <h2 class="chart-title">Fibonacci Visualization Chart</h2>
         <div class="chart" id="chart"></div>
       </div>
 
-      <div class="explanation">
+      <div class="spiral-container" id="spiral">
+        <h2 class="spiral-title">Fibonacci Spiral Visualization</h2>
+        <canvas
+          id="spiralCanvas"
+          class="spiral-canvas"
+          width="600"
+          height="400"
+        ></canvas>
+      </div>
+
+      <div class="explanation" id="explanation">
         <h2>
           <i class="fas fa-lightbulb"></i> Understanding the Fibonacci Sequence
         </h2>
@@ -483,7 +938,8 @@
         <p>
           The Fibonacci sequence is a series of numbers where each number is the
           sum of the two preceding ones, typically starting with 0 and 1. In our
-          visualizer, we start with 1 and 1 for simplicity.
+          visualizer, you can choose to start with any two numbers to see how
+          the sequence develops.
         </p>
 
         <h3>How It Works</h3>
@@ -492,7 +948,8 @@
           <li>Highlights the two previous numbers in gold</li>
           <li>Shows a "+" animation between them</li>
           <li>Adds a new bar representing their sum</li>
-          <li>Updates the sequence information</li>
+          <li>Updates the sequence information and Golden Ratio</li>
+          <li>Draws the corresponding Fibonacci spiral segment</li>
         </ul>
 
         <h3>Real-World Applications</h3>
@@ -506,7 +963,7 @@
         </ul>
       </div>
 
-      <div class="seo-content">
+      <div class="seo-content" id="insights">
         <h2>Fibonacci Sequence: Mathematical Insights</h2>
 
         <div class="seo-section">
@@ -518,7 +975,8 @@
           <p class="math-equation">F(n) = F(n-1) + F(n-2)</p>
           <p>
             with seed values F(0) = 0 and F(1) = 1. However, our visualization
-            starts with F(1) = 1 and F(2) = 1 for educational clarity.
+            allows you to start with any initial values to explore different
+            sequences.
           </p>
         </div>
 
@@ -537,7 +995,7 @@
         <div class="seo-section">
           <h3>Educational Value</h3>
           <p>
-            This interactive Fibonacci visualizer serves as an excellent
+            This enhanced Fibonacci visualizer serves as an excellent
             educational tool for:
           </p>
           <ul>
@@ -545,22 +1003,59 @@
             <li>Visualizing mathematical patterns</li>
             <li>Understanding exponential growth patterns</li>
             <li>Connecting mathematics to natural phenomena</li>
-            <li>Making abstract concepts tangible</li>
+            <li>Exploring the Golden Ratio concept</li>
           </ul>
         </div>
       </div>
-      <footer>
+
+      <!-- Documentation Links -->
+      <div class="toc-container" id="documentation">
+        <h2 class="toc-title">
+          <i class="fas fa-book"></i> Documentation & Resources
+        </h2>
+        <div class="doc-links">
+          <a
+            href="https://en.wikipedia.org/wiki/Fibonacci_sequence"
+            class="doc-link"
+            target="_blank"
+          >
+            <i class="fab fa-wikipedia-w"></i> Wikipedia
+          </a>
+          <a
+            href="https://mathworld.wolfram.com/FibonacciNumber.html"
+            class="doc-link"
+            target="_blank"
+          >
+            <i class="fas fa-square-root-alt"></i> MathWorld
+          </a>
+          <a
+            href="https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:sequences"
+            class="doc-link"
+            target="_blank"
+          >
+            <i class="fas fa-graduation-cap"></i> Khan Academy
+          </a>
+          <a
+            href="https://www.britannica.com/science/Fibonacci-number"
+            class="doc-link"
+            target="_blank"
+          >
+            <i class="fas fa-book-open"></i> Britannica
+          </a>
+        </div>
+      </div>
+
+      <footer id="footer">
         <p id="footer-text">
-          Fibonacci Sequence Visualizer by: Yasir Ali &copy;
+          Enhanced Fibonacci Sequence Visualizer by: Yasir Ali &copy;
           <span id="year"></span> - All Rights Reserved
         </p>
         <p>
           Designed for educational purposes | Perfect for math classrooms and
           self-learners
         </p>
-        <p>
-          Keywords: interactive math tool, fibonacci visualization, math
-          education, fibonacci sequence generator, mathematical patterns
+        <p class="keyboard-hint">
+          Keyboard Shortcuts: Space = Next Number | R = Reset | A = Auto Mode
         </p>
         <div class="social-icons">
           <a
@@ -570,6 +1065,14 @@
             aria-label="Facebook"
           >
             <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="https://twitter.com/itzyasiii"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>
           </a>
           <a
             href="https://github.com/itzyasii"
@@ -618,13 +1121,32 @@
         // Initialize Fibonacci sequence
         let fibSequence = [1, 1];
         let sequenceIndex = 1;
+        let animationSpeed = 800;
+        let autoMode = false;
+        let autoInterval;
         const chart = document.getElementById("chart");
         const nextBtn = document.getElementById("nextBtn");
+        const autoBtn = document.getElementById("autoBtn");
         const resetBtn = document.getElementById("resetBtn");
+        const speedSlider = document.getElementById("speedSlider");
+        const speedValue = document.getElementById("speedValue");
         const sequenceLength = document.getElementById("sequenceLength");
         const currentNumber = document.getElementById("currentNumber");
         const nextNumber = document.getElementById("nextNumber");
+        const goldenRatio = document.getElementById("goldenRatio");
+        const goldenRatioValue = document.getElementById("goldenRatioValue");
+        const setStartBtn = document.getElementById("setStartBtn");
+        const start1Input = document.getElementById("start1");
+        const start2Input = document.getElementById("start2");
+        const spiralCanvas = document.getElementById("spiralCanvas");
+        const ctx = spiralCanvas.getContext("2d");
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Initialize spiral
+        drawSpiral();
+
+        // Set initial animation speed display
+        speedValue.textContent = `${animationSpeed}ms`;
 
         // Create initial bars
         createBar(0, 1);
@@ -633,15 +1155,66 @@
         // Update info display
         updateInfo();
 
-        // Next button event
-        nextBtn.addEventListener("click", generateNext);
+        // Event listeners
+        nextBtn.addEventListener("click", function () {
+          generateNext();
+          // Scroll to visualization after generating next number
+          document.getElementById("visualization").scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        });
 
-        // Reset button event
+        autoBtn.addEventListener("click", function () {
+          toggleAutoMode();
+          // Scroll to visualization when auto mode starts
+          if (autoMode) {
+            document.getElementById("visualization").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          }
+        });
+
         resetBtn.addEventListener("click", resetSequence);
+        speedSlider.addEventListener("input", updateSpeed);
+        setStartBtn.addEventListener("click", setStartValues);
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", function (e) {
+          if (e.code === "Space") {
+            e.preventDefault();
+            generateNext();
+            // Scroll to visualization
+            document.getElementById("visualization").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          } else if (e.code === "KeyR") {
+            resetSequence();
+          } else if (e.code === "KeyA") {
+            toggleAutoMode();
+            if (autoMode) {
+              document.getElementById("visualization").scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+            }
+          }
+        });
 
         // Generate next Fibonacci number
         function generateNext() {
           sequenceIndex++;
+
+          // Prevent generating too many numbers
+          if (sequenceIndex > 20) {
+            if (autoMode) toggleAutoMode();
+            alert(
+              "Maximum sequence length reached (20 numbers). Reset to start again."
+            );
+            return;
+          }
 
           // Calculate next Fibonacci number
           const nextFib =
@@ -656,6 +1229,9 @@
 
           // Show plus sign animation
           showPlusAnimation();
+
+          // Draw spiral
+          drawSpiral();
 
           // Update info display
           updateInfo();
@@ -680,7 +1256,7 @@
           // Create bar label
           const barLabel = document.createElement("div");
           barLabel.className = "bar-label";
-          barLabel.textContent = `F${index}`;
+          barLabel.textContent = `F${index + 1}`;
           bar.appendChild(barLabel);
 
           chart.appendChild(bar);
@@ -700,7 +1276,7 @@
           setTimeout(() => {
             if (bars[index1]) bars[index1].classList.remove("highlight");
             if (bars[index2]) bars[index2].classList.remove("highlight");
-          }, 1500);
+          }, animationSpeed);
         }
 
         // Show plus sign animation between highlighted bars
@@ -722,7 +1298,7 @@
           // Remove plus sign after animation
           setTimeout(() => {
             plus.remove();
-          }, 1500);
+          }, animationSpeed);
         }
 
         // Update information display
@@ -730,11 +1306,18 @@
           sequenceLength.textContent = fibSequence.length;
           currentNumber.textContent = fibSequence[sequenceIndex];
 
-          if (sequenceIndex >= 1) {
-            nextNumber.textContent =
-              fibSequence[sequenceIndex] + fibSequence[sequenceIndex - 1];
-          } else {
-            nextNumber.textContent = fibSequence[0] + fibSequence[1];
+          // Calculate next number
+          const nextNum =
+            fibSequence[sequenceIndex] + fibSequence[sequenceIndex - 1];
+          nextNumber.textContent = nextNum;
+
+          // Calculate golden ratio
+          if (sequenceIndex > 0) {
+            const ratio =
+              fibSequence[sequenceIndex] / fibSequence[sequenceIndex - 1];
+            const ratioDisplay = ratio.toFixed(5);
+            goldenRatio.textContent = ratioDisplay;
+            goldenRatioValue.textContent = ratioDisplay;
           }
         }
 
@@ -746,6 +1329,119 @@
           createBar(0, 1);
           createBar(1, 1);
           updateInfo();
+          drawSpiral();
+
+          // If in auto mode, stop it
+          if (autoMode) toggleAutoMode();
+        }
+
+        // Toggle auto generation mode
+        function toggleAutoMode() {
+          autoMode = !autoMode;
+
+          if (autoMode) {
+            autoBtn.innerHTML = '<i class="fas fa-pause"></i> Stop Auto';
+            autoBtn.classList.add("active");
+            autoInterval = setInterval(generateNext, animationSpeed + 300);
+          } else {
+            autoBtn.innerHTML = '<i class="fas fa-play"></i> Auto Generate';
+            autoBtn.classList.remove("active");
+            clearInterval(autoInterval);
+          }
+        }
+
+        // Update animation speed
+        function updateSpeed() {
+          animationSpeed = parseInt(speedSlider.value);
+          speedValue.textContent = `${animationSpeed}ms`;
+
+          // Update auto interval if running
+          if (autoMode) {
+            clearInterval(autoInterval);
+            autoInterval = setInterval(generateNext, animationSpeed + 300);
+          }
+        }
+
+        // Set starting values
+        function setStartValues() {
+          const start1 = parseInt(start1Input.value) || 1;
+          const start2 = parseInt(start2Input.value) || 1;
+
+          if (start1 < 0 || start2 < 0) {
+            alert("Please enter positive numbers");
+            return;
+          }
+
+          fibSequence = [start1, start2];
+          sequenceIndex = 1;
+          chart.innerHTML = "";
+          createBar(0, start1);
+          createBar(1, start2);
+          updateInfo();
+          drawSpiral();
+
+          // If in auto mode, stop it
+          if (autoMode) toggleAutoMode();
+        }
+
+        // Draw Fibonacci spiral
+        function drawSpiral() {
+          // Clear canvas
+          ctx.clearRect(0, 0, spiralCanvas.width, spiralCanvas.height);
+
+          // Only draw if we have at least 2 numbers
+          if (fibSequence.length < 2) return;
+
+          const centerX = spiralCanvas.width / 2;
+          const centerY = spiralCanvas.height / 2;
+          let x = centerX;
+          let y = centerY;
+          let direction = 0; // 0: right, 1: down, 2: left, 3: up
+          let radius = 0;
+
+          // Set drawing style
+          ctx.strokeStyle = "#ffd166";
+          ctx.lineWidth = 3;
+          ctx.fillStyle = "rgba(78, 84, 200, 0.3)";
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+
+          // Draw squares and arcs for each Fibonacci number
+          for (let i = 0; i < fibSequence.length && i < 8; i++) {
+            const size = fibSequence[i] * 5; // Scale factor for visualization
+
+            // Draw square
+            ctx.fillRect(x, y, size, size);
+            ctx.strokeRect(x, y, size, size);
+
+            // Draw arc for spiral
+            ctx.beginPath();
+
+            // Determine arc center and angles based on direction
+            switch (direction) {
+              case 0: // right
+                ctx.arc(x + size, y, size, Math.PI, Math.PI * 1.5);
+                x += size;
+                break;
+              case 1: // down
+                ctx.arc(x, y + size, size, Math.PI * 1.5, Math.PI * 2);
+                y += size;
+                break;
+              case 2: // left
+                ctx.arc(x, y, size, 0, Math.PI * 0.5);
+                x -= size;
+                break;
+              case 3: // up
+                ctx.arc(x + size, y, size, Math.PI * 0.5, Math.PI);
+                y -= size;
+                break;
+            }
+
+            ctx.stroke();
+
+            // Update direction for next square
+            direction = (direction + 1) % 4;
+          }
         }
       });
     </script>
