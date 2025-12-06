@@ -453,7 +453,229 @@ class FibonacciVisualizer {
   }
 }
 
+// --- New Features ---
+
+class ParticleNetwork {
+  constructor() {
+    this.canvas = document.getElementById("bgCanvas");
+    this.ctx = this.canvas.getContext("2d");
+    this.particles = [];
+    this.resize();
+
+    window.addEventListener("resize", () => this.resize());
+    this.initParticles();
+    this.animate();
+  }
+
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+
+  initParticles() {
+    const count = Math.min(window.innerWidth / 10, 100); // Responsive count
+    for (let i = 0; i < count; i++) {
+      this.particles.push({
+        x: Math.random() * this.canvas.width,
+        y: Math.random() * this.canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1,
+      });
+    }
+  }
+
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Update and draw particles
+    this.particles.forEach((p, index) => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Bounce off edges
+      if (p.x < 0 || p.x > this.canvas.width) p.vx *= -1;
+      if (p.y < 0 || p.y > this.canvas.height) p.vy *= -1;
+
+      this.ctx.beginPath();
+      this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      this.ctx.fillStyle = "rgba(100, 100, 255, 0.2)";
+      this.ctx.fill();
+
+      // Connect particles
+      for (let j = index + 1; j < this.particles.length; j++) {
+        const p2 = this.particles[j];
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 150) {
+          this.ctx.beginPath();
+          this.ctx.strokeStyle = `rgba(100, 100, 255, ${0.1 - dist / 1500})`;
+          this.ctx.lineWidth = 1;
+          this.ctx.moveTo(p.x, p.y);
+          this.ctx.lineTo(p2.x, p2.y);
+          this.ctx.stroke();
+        }
+      }
+    });
+
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+class FunFactsManager {
+  constructor() {
+    this.facts = [
+      "The Fibonacci sequence is named after Leonardo of Pisa, who was known as Fibonacci.",
+      "Fibonacci numbers appear in the arrangement of leaves (phyllotaxis) to optimize sunlight exposure.",
+      "The ratio of consecutive Fibonacci numbers converges to the Golden Ratio (approx. 1.618).",
+      "Honeybees have a family tree that follows the Fibonacci sequence.",
+      "The number of petals on a flower is often a Fibonacci number (e.g., lilies have 3, buttercups 5).",
+      "Fibonacci numbers are used in computer algorithms, such as the Fibonacci search technique.",
+      "The spiral of a pinecone follows Fibonacci numbers.",
+      "November 23rd is celebrated as Fibonacci Day (11/23 -> 1, 1, 2, 3).",
+    ];
+    this.currentIndex = 0;
+    this.textEl = document.getElementById("funFactText");
+    this.btn = document.getElementById("nextFactBtn");
+
+    this.btn.addEventListener("click", () => this.nextFact());
+    this.showFact();
+  }
+
+  nextFact() {
+    this.currentIndex = (this.currentIndex + 1) % this.facts.length;
+    this.showFact();
+  }
+
+  showFact() {
+    this.textEl.style.opacity = 0;
+    setTimeout(() => {
+      this.textEl.textContent = this.facts[this.currentIndex];
+      this.textEl.style.opacity = 1;
+    }, 300);
+  }
+}
+
+class QuizManager {
+  constructor() {
+    this.questions = [
+      {
+        q: "What is the next number in the sequence: 1, 1, 2, 3, 5...?",
+        options: ["7", "8", "9", "10"],
+        correct: 1, // Index of correct answer
+      },
+      {
+        q: "Which famous ratio do Fibonacci numbers approximate?",
+        options: [
+          "Pi (π)",
+          "Golden Ratio (φ)",
+          "Euler's Number (e)",
+          "Silver Ratio",
+        ],
+        correct: 1,
+      },
+      {
+        q: "Who introduced the Fibonacci sequence to Western mathematics?",
+        options: [
+          "Isaac Newton",
+          "Leonardo of Pisa",
+          "Pythagoras",
+          "Archimedes",
+        ],
+        correct: 1,
+      },
+      {
+        q: "Which of these flowers typically has 5 petals (a Fibonacci number)?",
+        options: ["Lily", "Buttercup", "Daisy", "Rose"],
+        correct: 1,
+      },
+    ];
+    this.currentQ = 0;
+    this.score = 0;
+
+    this.qEl = document.getElementById("quizQuestion");
+    this.optsEl = document.getElementById("quizOptions");
+    this.feedbackEl = document.getElementById("quizFeedback");
+    this.nextBtn = document.getElementById("nextQuestionBtn");
+
+    this.nextBtn.addEventListener("click", () => this.nextQuestion());
+    this.loadQuestion();
+  }
+
+  loadQuestion() {
+    const q = this.questions[this.currentQ];
+    this.qEl.textContent = q.q;
+    this.optsEl.innerHTML = "";
+    this.feedbackEl.textContent = "";
+    this.feedbackEl.className = "quiz-feedback";
+    this.nextBtn.style.display = "none";
+
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement("div");
+      btn.className = "quiz-option";
+      btn.textContent = opt;
+      btn.addEventListener("click", () => this.checkAnswer(idx, btn));
+      this.optsEl.appendChild(btn);
+    });
+  }
+
+  checkAnswer(selectedIdx, btnElement) {
+    if (this.feedbackEl.textContent) return; // Already answered
+
+    const q = this.questions[this.currentQ];
+    const options = this.optsEl.children;
+
+    if (selectedIdx === q.correct) {
+      btnElement.classList.add("correct");
+      this.feedbackEl.textContent = "Correct! Well done.";
+      this.feedbackEl.classList.add("success");
+      this.score++;
+    } else {
+      btnElement.classList.add("incorrect");
+      options[q.correct].classList.add("correct");
+      this.feedbackEl.textContent =
+        "Incorrect. The correct answer is highlighted.";
+      this.feedbackEl.classList.add("error");
+    }
+
+    this.nextBtn.style.display = "block";
+  }
+
+  nextQuestion() {
+    this.currentQ++;
+    if (this.currentQ < this.questions.length) {
+      this.loadQuestion();
+    } else {
+      this.showResults();
+    }
+  }
+
+  showResults() {
+    this.qEl.textContent = "Quiz Completed!";
+    this.optsEl.innerHTML = `
+      <div style="text-align: center; grid-column: 1 / -1;">
+        <h3 style="font-size: 2rem; margin-bottom: 10px;">${this.score} / ${this.questions.length}</h3>
+        <p>Thanks for playing!</p>
+        <button id="restartQuiz" class="btn btn-primary" style="margin: 20px auto;">Restart Quiz</button>
+      </div>
+    `;
+    this.feedbackEl.textContent = "";
+    this.nextBtn.style.display = "none";
+
+    document.getElementById("restartQuiz").addEventListener("click", () => {
+      this.currentQ = 0;
+      this.score = 0;
+      this.loadQuestion();
+    });
+  }
+}
+
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
   new FibonacciVisualizer();
+  new ParticleNetwork();
+  new FunFactsManager();
+  new QuizManager();
 });

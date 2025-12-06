@@ -98,8 +98,29 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Fibonacci Visualizer",
+        "url": "https://fibonacci-visualized.netlify.app/",
+        "description": "Interactive tool to visualize the Fibonacci sequence, Golden Ratio, and Golden Spiral.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Yasir Ali"
+        }
+      }
+    </script>
   </head>
   <body>
+    <canvas id="bgCanvas"></canvas>
     <header>
       <div class="container">
         <div class="logo">
@@ -371,6 +392,65 @@
                 Fibonacci sequences for optimal sunlight.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fun Facts Section -->
+      <section class="glass-card reveal" style="margin-top: 40px">
+        <div style="padding: 20px; text-align: center">
+          <h2
+            style="
+              margin-bottom: 20px;
+              color: var(--accent-secondary);
+              font-family: var(--font-display);
+            "
+          >
+            <i class="fa-solid fa-lightbulb"></i> Did You Know?
+          </h2>
+          <div id="funFactContainer" class="fun-fact-container">
+            <p id="funFactText" class="fun-fact-text">
+              Loading amazing facts...
+            </p>
+            <button
+              id="nextFactBtn"
+              class="btn btn-small"
+              style="margin: 20px auto 0"
+            >
+              Next Fact
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz Section -->
+      <section class="glass-card reveal" style="margin-top: 40px">
+        <div style="padding: 30px">
+          <h2
+            style="
+              margin-bottom: 30px;
+              color: var(--accent-secondary);
+              font-family: var(--font-display);
+              text-align: center;
+            "
+          >
+            <i class="fa-solid fa-graduation-cap"></i> Test Your Knowledge
+          </h2>
+          <div id="quizContainer" class="quiz-container">
+            <div id="quizQuestion" class="quiz-question">
+              Question will appear here...
+            </div>
+            <div id="quizOptions" class="quiz-options">
+              <!-- Options injected via JS -->
+            </div>
+            <div id="quizFeedback" class="quiz-feedback"></div>
+            <button
+              id="nextQuestionBtn"
+              class="btn btn-primary"
+              style="margin-top: 20px; display: none"
+            >
+              Next Question
+            </button>
           </div>
         </div>
       </section>
